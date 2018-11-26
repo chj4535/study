@@ -5,7 +5,7 @@ const patientModel = require('../db/models/patient')
 router.post('/register',function (req,res) {
     console.log('/patient/register 입장');
     console.log(req.body.name);
-    patientModel.create({name:req.body.name,isCalled:'no',Office:''},function (err,result) {
+    patientModel.create({name:req.body.name,isCalled:'No',Office:''},function (err,result) {
        if(err) return console.log(err);
        else{
            res.send('');
