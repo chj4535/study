@@ -57,8 +57,8 @@
                 patient_number:''
             }
         },
-        created: function(){
-            this.axios.get('http://localhost:8000/doctor/list').then((res) => {
+        created: async function(){
+            await this.axios.get('http://localhost:8000/doctor/list').then((res) => {
                 this.list=res.data;
             })
         },

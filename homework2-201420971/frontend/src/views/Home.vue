@@ -43,8 +43,8 @@
               list:[],
           }
       },
-      created: function(){
-          this.axios.get('http://localhost:8000/patient/list').then((res) => {
+      created: async function(){
+          await this.axios.get('http://localhost:8000/patient/list').then((res) => {
               this.list=res.data;
           })
       },
