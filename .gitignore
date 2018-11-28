@@ -1,3 +1,6 @@
-*/node_modules/
-*/node_modules/
-homework2-201420971/.idea/
+node_modules/
+node_modules/
+.idea/
+*.jpg
+*.png
+package-lock.json
