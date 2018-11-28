@@ -49,15 +49,15 @@
           })
       },
       methods:{
-          newPatient:function() {
-              this.axios.post('http://localhost:8000/patient/register',{
+          newPatient:async function() {
+              await this.axios.post('http://localhost:8000/patient/register',{
                   name:this.new_patient_name
               }).then((res) => {
               })
               this.new_patient_name='';
           },
-          getlist:function () {
-              this.axios.get('http://localhost:8000/patient/list').then((res) => {
+          getlist:async function () {
+              await this.axios.get('http://localhost:8000/patient/list').then((res) => {
                   this.list=res.data;
               })
           }
