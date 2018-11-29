@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div id="nav" style="text-align: center">
+      <h1>게시글 리스트</h1>
       <ul>
-
         <li v-for="item in list" :key="item.id">
           <router-link :to="{name:'POST', params:{id:item.id}}">{{item.title}}</router-link>
         </li>

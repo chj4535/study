@@ -1,6 +1,8 @@
 <template>
-    <div>
-        hello {{id}}
+    <div style="text-align: center">
+        {{posting}}
+        <h1>{{post.title}}</h1>
+        <p>{{post.content}}</p>
     </div>
 </template>
 
@@ -8,13 +10,14 @@
     export default {
         name: "Post",
         data(){
-            console.log(1)
             return{
+                post:{}
             };
         },
-        computed: {
-            id() {
-                return this.$route.params.id
+        asyncComputed:{
+            async posting(){
+                const res = await this.$http.get('http://localhost:8000/post/'+this.$route.params.id);
+                this.post =  res.data;
             }
         }
     }
