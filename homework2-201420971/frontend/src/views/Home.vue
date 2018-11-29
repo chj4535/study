@@ -44,9 +44,7 @@
           }
       },
       created: async function(){
-          await this.axios.get('http://localhost:8000/patient/list').then((res) => {
-              this.list=res.data;
-          })
+          await this.axios.get('http://localhost:8000/patient/list').t
       },
       methods:{
           newPatient:function() {
