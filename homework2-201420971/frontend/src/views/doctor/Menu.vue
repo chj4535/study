@@ -63,18 +63,18 @@
             })
         },
         methods:{
-            Terminate:function(){
-                this.axios.get('http://localhost:8000/doctor/done/'+this.patient_number).then((res) => {
+            Terminate:async function(){
+                await this.axios.get('http://localhost:8000/doctor/done/'+this.patient_number).then((res) => {
                 })
                 this.patient_number='';
             },
-            CallPatient:function(){
-                this.axios.get('http://localhost:8000/doctor/call/'+this.doctor_name).then((res) => {
+            CallPatient:async function(){
+                await this.axios.get('http://localhost:8000/doctor/call/'+this.doctor_name).then((res) => {
                 })
                 this.doctor_name='';
             },
-            newDoctor:function () {
-                this.axios.post('http://localhost:8000/doctor/register',{
+            newDoctor:async function () {
+                await this.axios.post('http://localhost:8000/doctor/register',{
                     name:this.new_doctor_name,
                     office:this.new_doctor_office
                 }).then((res) => {
@@ -82,8 +82,8 @@
                 this.new_doctor_name='';
                 this.new_doctor_office='';
             },
-            getlist:function () {
-                this.axios.get('http://localhost:8000/doctor/list').then((res) => {
+            getlist:async function () {
+                await this.axios.get('http://localhost:8000/doctor/list').then((res) => {
                     this.list=res.data;
                 })
             }

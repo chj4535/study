@@ -8,8 +8,25 @@ const dbName = 'db';
 var param=new Object();
 
 user.use("/:userid",(req,res,next)=>{
-    param['userid']=req.params.userid;
     console.log("user 진입");
+    param['userid']=req.params.userid;
+    MongoClient.connect('mongodb://localhost:27017/',  { useNewUrlParser: true }, function (error, client) {
+        if (error) console.log(error);
+        else {
+            const db = client.db(dbName);
+            db.collection('userinfo').find({userid:param['userid']}).toArray(function(err,doc){
+                if (error) console.log(error);
+                else{
+                    console.log(doc.toString())
+                    if (doc.toString()!=''){
+                        console.log('유저 정보 확인! ')
+                        param['email']=doc[0].email;
+                        console.log(param['email']);
+                    }
+                }
+            });
+        }
+    });
     next();
 })
 
@@ -50,7 +67,7 @@ user.get("/:userid",(req,res)=>{ //그룹 조회
         if (error) console.log(error);
         else {
             const db = client.db(dbName);
-            db.collection('groupmember').find({groupuserid:param['userid']}).toArray(function(err,doc){
+            db.collection('groups').find({}).toArray(async function(err,doc){
                 if (err) console.log(err);
                 else{
                     var num=0;
@@ -58,20 +75,17 @@ user.get("/:userid",(req,res)=>{ //그룹 조회
                     var jsa = new Array();
                     console.log(doc.length)
                     numfind=doc.length;
-                    doc.forEach((item)=>{
-                        db.collection('groups').findOne({groupid:item.groupid},function (err,group_res) {
-                            if(err)console.log(err)
-                            else {
-                                console.log(group_res);
-                                jsa.push(group_res);
-                                console.log('result :', jsa);
-                                if (jsa.length == numfind) {
-                                    console.log('final : ', jsa)
-                                    res.send(jsa)
-                                }
+                    await doc.forEach((item)=>{
+                        var list=item.invitedUsers;
+                        console.log(list);
+                        for(var i=0;i<list.length;i++){
+                            if(list[i]==param['email']){
+                                jsa.push(item);
+                                break;
                             }
-                        })
+                        }
                     });
+                    res.send(jsa);
                 }
             });
         }
@@ -110,3 +124,36 @@ user.use("/:userid/board",board);
 
 module.exports = user;
 
+
+/*
+MongoClient.connect('mongodb://localhost:27017/',  { useNewUrlParser: true }, function (error, client) {
+        if (error) console.log(error);
+        else {
+            const db = client.db(dbName);
+            db.collection('groupmember').find({groupuserid:param['userid']}).toArray(function(err,doc){
+                if (err) console.log(err);
+                else{
+                    var num=0;
+                    var numfind=0;
+                    var jsa = new Array();
+                    console.log(doc.length)
+                    numfind=doc.length;
+                    doc.forEach((item)=>{
+                        db.collection('groups').findOne({groupid:item.groupid},function (err,group_res) {
+                            if(err)console.log(err)
+                            else {
+                                console.log(group_res);
+                                jsa.push(group_res);
+                                console.log('result :', jsa);
+                                if (jsa.length == numfind) {
+                                    console.log('final : ', jsa)
+                                    res.send(jsa)
+                                }
+                            }
+                        })
+                    });
+                }
+            });
+        }
+    });
+ */
