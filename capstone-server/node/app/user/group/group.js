@@ -97,5 +97,11 @@ module.exports = function (param) {
     const group_chat = require('./group_chat/group_chat')(param);
     group.use("/:groupid/chat", group_chat);
 
+    const budget = require('./Budget/group_budget')(param);
+    group.use("/:groupid/budget", budget);
+
+    const gbudget = require('./gBudget/group_gbudget')(param);
+    group.use("/:groupid/gbudget", gbudget);
+
     return group;
 };
