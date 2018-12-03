@@ -77,15 +77,18 @@ user.get("/:userid",(req,res)=>{ //그룹 조회
                     numfind=doc.length;
                     await doc.forEach((item)=>{
                         var list=item.invitedUsers;
-                        console.log(list);
+                        console.log('list: ',list);
                         for(var i=0;i<list.length;i++){
-                            if(list[i]==param['email']){
+                            // console.log('현재 이메일 : '+param['email'],'조회 이메일 : '+list[i].email);
+                            if(list[i].email==param['email']){
                                 jsa.push(item);
+                                // console.log('그룹 단일 조회 jsa : ',jsa);
                                 break;
                             }
                         }
                     });
-                    res.send(jsa);
+                    // await console.log('그룹 조회 jsa : ',jsa);
+                    await res.send(jsa);
                 }
             });
         }

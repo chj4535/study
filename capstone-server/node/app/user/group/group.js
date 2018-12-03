@@ -29,13 +29,11 @@ module.exports = function (param) {
     group.post("/", (req, res) => {//그룹 생성
         console.log('그룹 생성')
         var nowgroupnum; //현재 몽고 그룹 숫자
-        var json = Object.keys(req.body);
-        var jspar = (JSON.parse(json));
+        var jspar = req.body;
         var data;
 
         console.log(req.body);
-        console.log('0번방 :' + json[0]);
-        console.log(jspar.groupname)
+        console.log(jspar.groupinfo);
 
         MongoClient.connect('mongodb://localhost:27017/',  { useNewUrlParser: true }, function (error, client) {
             if (error) console.log(error);
@@ -46,12 +44,33 @@ module.exports = function (param) {
                     else {
                         nowgroupnum = doc["groupnum"];
                         console.log(nowgroupnum);
-                        Object.assign(jspar,{groupid:nowgroupnum+1}); // 그룹 아이디 증가
-                        db.collection('groupmember').insert({groupid:nowgroupnum+1,groupuserid:param['userid']});
-                        db.collection('groups').insert(jspar);
-                        db.collection('numcheck').updateOne({groupnum:nowgroupnum},{$set:{groupnum:nowgroupnum+1}});
-                        data=String(nowgroupnum+1)
-                        res.send(data)
+                        Object.assign(jspar.groupinfo,{groupid:nowgroupnum+1}); // 그룹 아이디 증가
+                        console.log(jspar.invitedUsers.length);
+
+                        var chemail = new Promise((resolve, reject) => {
+                            var num=-1;
+                            jspar.invitedUsers.forEach(
+                               (eachemail) => {
+                                    console.log(eachemail)
+                                    db.collection('userinfo').find({email:eachemail.email}).toArray(function (err,userdoc){
+                                        num+=1;
+                                        console.log("find:",userdoc)
+                                        data=userdoc[0]
+                                        Object.assign(jspar.invitedUsers[num],{name:data.username}); // 그룹 아이디 증가
+                                        console.log('after : ',eachemail);
+                                        if(num==jspar.invitedUsers.length-1) resolve();
+                                    });
+                                }
+                            );
+                        });
+
+                        chemail.then(()=>{
+                            console.log('after await : ',jspar);
+                            db.collection('groups').insert(jspar);
+                            db.collection('numcheck').updateOne({groupnum:nowgroupnum},{$set:{groupnum:nowgroupnum+1}});
+                            data=String(nowgroupnum+1)
+                            res.send(data)
+                        })
                     }
                 });
             }

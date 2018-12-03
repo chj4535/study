@@ -42,7 +42,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('send', function (data) {
-        let dataAddinfo = {ip: socket.handshake.address, msg: data.comment, date: Date.now(), userid:data.userid};
+        let dataAddinfo = {ip: socket.handshake.address, msg: data.comment, date: Date.now(), email:data.email};
         console.log(dataAddinfo)
         MongoClient.connect('mongodb://localhost:27017/', function (error, client) {
             if (error) console.log(error);
@@ -53,7 +53,7 @@ io.on('connection', function (socket) {
                     msg: dataAddinfo.msg,
                     date: dataAddinfo.date,
                     channel: data.channel,
-                    userid: dataAddinfo.userid
+                    email: dataAddinfo.email
                 }, function (err, doc) {
                     if (err) console.log(err);
                     client.close();
@@ -76,6 +76,7 @@ io.on('connection', function (socket) {
 var multer = require('multer'); // multer모듈 적용 (for 파일업로드)
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
+        console.log('file : ',file);
         cb(null, 'uploads/') // cb 콜백함수를 통해 전송된 파일 저장 디렉토리 설정
     },
     filename: function (req, file, cb) {
@@ -87,7 +88,7 @@ var upload = multer({ storage: storage })
 app.use('/down', express.static('uploads')); // express를 통한 경로
 app.post('/upload', upload.single('userfile'), function(req, res){
     res.send('Uploaded! : '+req.file); // object를 리턴함
-    console.log(req.file); // 콘솔(터미널)을 통해서 req.file Object 내용 확인 가능.
+    console.log('upload!!! : '+req.file); // 콘솔(터미널)을 통해서 req.file Object 내용 확인 가능.
 });
 /*업로드 부분*/
 
