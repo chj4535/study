@@ -56,7 +56,7 @@ module.exports = function (param) {
                                         num+=1;
                                         console.log("find:",userdoc)
                                         data=userdoc[0]
-                                        Object.assign(jspar.invitedUsers[num],{name:data.username}); // 그룹 아이디 증가
+                                        Object.assign(eachemail,{name:data.username}); // 그룹 아이디 증가
                                         console.log('after : ',eachemail);
                                         if(num==jspar.invitedUsers.length-1) resolve();
                                     });
