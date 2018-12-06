@@ -103,5 +103,7 @@ module.exports = function (param) {
     const gbudget = require('./gBudget/group_gbudget')(param);
     group.use("/:groupid/gbudget", gbudget);
 
+    const card = require('./Card/card')(param);
+    group.use("/:groupid/card", card);
     return group;
 };
