@@ -95,7 +95,7 @@ user.get("/:userid",(req,res)=>{ //그룹 조회
     });
 });
 
-user.delete("/:userid",(req,res)=>{//유저 삭제
+user.delete("/",(req,res)=>{//유저 삭제
 
     console.log('유저 삭제')
     console.log(param['userid'])
@@ -111,7 +111,7 @@ user.delete("/:userid",(req,res)=>{//유저 삭제
         if (error) console.log(error);
         else {
             const db = client.db(dbName);
-            console(jspar)
+            console.log(jspar);
             db.collection('userinfo').remove(jspar);
         }
     });
