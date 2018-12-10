@@ -42,7 +42,7 @@ module.exports = function (param) {
                 db.collection('calender').deleteMany({groupid:param['groupid']},function (err,client) {
                     if(err) console.log(err);
                     else{
-                        card_items.forEach((calender_item)=>{
+                        calender_items.forEach((calender_item)=>{
                             console.log(calender_item);
                             Object.assign(calender_item,{groupid:param['groupid']});
                             db.collection('calender').insert(calender_item);
@@ -51,6 +51,7 @@ module.exports = function (param) {
                 })
             }
         });
+        res.send(200);
     });
 
     return calender;

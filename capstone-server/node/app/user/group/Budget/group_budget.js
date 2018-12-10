@@ -34,6 +34,7 @@ module.exports = function (param) {
         console.log("group_budget 추가!");
         let budget_item;
         console.log(req.body);
+        console.log(param['groupid']);
         budget_item=req.body;
         MongoClient.connect('mongodb://localhost:27017/',  { useNewUrlParser: true }, function (error, client) {
             if (error) console.log(error);
