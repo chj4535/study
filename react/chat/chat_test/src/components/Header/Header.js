@@ -5,10 +5,30 @@ import { Icon, Input } from 'semantic-ui-react'
 class Header extends Component {
   constructor(props) {
       super(props);
+      this.state={
+        login:this.props.login,
+        alarm:this.props.alarm
+      };
+   }
+
+   Click_Profile=()=>{
+     this.setState({ alarm: true });
    }
     render() {
-      var alarm_exist= 'block';
-      var alarm_none= 'none';
+      var alarm_state= 'block';
+      var login_state= 'hidden';
+      if(this.state.login==false){
+        login_state='hidden';
+      }
+      else{
+        login_state='visible';
+      }
+      if(this.state.alarm==false){
+        alarm_state='none';
+      }
+      else{
+        alarm_state='block';
+      }
       return (
         <div className="Header_body">
           <div className="Header_Logo">
@@ -19,19 +39,18 @@ class Header extends Component {
           </div>
 
           <div className="Header_Profile_form">
-            <div className="Header_Profile">
+            <div className="Header_Profile" style={{visibility:login_state}}  onClick={this.Click_Profile}>
             <img className="round_img" src={Logo} alt="logo"/>
             <Icon size='large' name='caret down'/>
             </div>
           </div>
 
           <div className="Header_Alarm">
-            <Icon.Group size='big'>
+            <Icon.Group size='big' style={{visibility:login_state}}>
             <Icon color='black'  name='alarm' circular inverted/>
-            <Icon style={{display:alarm_exist}} color='red' corner name='exclamation' />
+            <Icon style={{display:alarm_state}} color='red' corner name='exclamation' />
             </Icon.Group>
           </div>
-
 
 
         </div>

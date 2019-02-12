@@ -8,14 +8,15 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      login : false
+      login : true,
+      alarm : false
     };
   }
   render() {
     const state = {key:"3",      username:"choi",      text:"안녕"    };
     return (
       <div>
-        <Header login={this.state.login}/>
+        <Header login={this.state.login} alarm={this.state.alarm}/>
         <Route exact path="/" render={(props) => ( <Message state={state}/> )} />
         <Route exact path="/login" render={(props) => ( <Login login={this.state.login}/> )} />
 
