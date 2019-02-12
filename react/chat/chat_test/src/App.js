@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route } from 'react-router-dom';
+import Message from './components/Message/Message';
+import Login from './components/Login/Login';
+import Header from './components/Header/Header';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      login : false
+    };
+  }
   render() {
+    const state = {key:"3",      username:"choi",      text:"안녕"    };
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <Header login={this.state.login}/>
+        <Route exact path="/" render={(props) => ( <Message state={state}/> )} />
+        <Route exact path="/login" render={(props) => ( <Login login={this.state.login}/> )} />
+
       </div>
     );
   }
