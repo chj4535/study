@@ -27,4 +27,20 @@ components를 presentation/ container로 분리하는 이유 / 방법
 https://gist.github.com/chantastic/fc9e3853464dffdb1e3c
 
 react-redux 적용법
-https://d2.naver.com/helloworld/1848131
+https://d2.naver.com/helloworld/1848131 => 현 프로젝트가 적용한 방법
+http://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example#services-folder
+
+fetch res.json 필터링
+https://stackoverflow.com/questions/46579533/what-does-thenres-res-json-in-react-native-fetch-mean
+
+dispatch
+https://deminoth.github.io/redux/api/Store.html#dispatch
+
+input 값 등 변경 실시간 감지(react에서 / handleChange)
+https://velopert.com/3634
+
+json보낼때 header형식
+https://stackoverflow.com/questions/29775797/fetch-post-json-data
+
+json형식 받기
+https://medium.com/@flsqja12_33844/1%EB%B6%84-%ED%8C%A8%ED%82%A4%EC%A7%80-%EC%86%8C%EA%B0%9C-body-parser%EB%A5%BC-%EC%86%8C%EA%B0%9C%ED%95%A9%EB%8B%88%EB%8B%A4-%ED%95%98%EC%A7%80%EB%A7%8C-body-parser%EB%A5%BC-%EC%93%B0%EC%A7%80-%EB%A7%88%EC%84%B8%EC%9A%94-bc3cbe0b2fd
