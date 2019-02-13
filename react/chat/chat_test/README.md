@@ -66,28 +66,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
-react와 express연동
-https://nextus.tistory.com/21
-*참고*
-devServer위치
-plugins: [
-  // Generates an `index.html` file with the <script> injected.
-  new HtmlWebpackPlugin(
-    Object.assign(
-
-react livechat-ui
-https://developers.livechatinc.com/docs/react-chat-ui-kit/#user-guide
-
-react livechat-ui 사용 예제
-https://github.com/livechat/chat-widget-sample/blob/c86b8fc5b0e21a94656633daad79d87df6c28bdf/src/components/Maximized.js
-
-라우팅예제
-https://velopert.com/1173 => 링크 쓰는법
-https://velopert.com/3417 => 라우팅
-
-채팅부분 +css 예제
-https://scrimba.com/p/pbNpTv/cVJ7MAg
-
-사용자 정의 css 변수 적용법
-https://developer.mozilla.org/ko/docs/Web/CSS/Using_CSS_variables
