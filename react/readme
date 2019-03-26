@@ -1,5 +1,6 @@
 yarn eject실패 시
 https://liante0904.tistory.com/176
+// 위 방법으로 안되면 그냥 create~~해서 프로젝트 만들고 git에 수동으로 올리고나서 yarn eject하면 된다 ( 원인이 git commit? push때문임)
 
 react와 express연동
 https://nextus.tistory.com/21

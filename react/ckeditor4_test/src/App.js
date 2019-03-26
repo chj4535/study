@@ -1,28 +1,55 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import CKEditor from 'ckeditor4-react';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+  constructor( props ) {
+          super( props );
 
+          this.state = {
+              data: '<p>React is really <em>nice</em>!</p>',
+              data2:""
+          };
+          this.onEditorChange = this.onEditorChange.bind( this );
+          this.handleClick = this.handleClick.bind(this);
+      }
+
+      handleClick(){
+        this.setState({
+          data2:this.state.data
+        });
+
+
+        fetch('/getdata', {
+          method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({data: this.state.data})
+        });
+      }
+
+      onEditorChange( evt ) {
+          this.setState( {
+              data: evt.editor.getData()
+          } );
+          console.log(this.state.data);
+      }
+
+      render() {
+          return (
+              <div>
+                <CKEditor
+                  data={this.state.data}
+                  onChange={this.onEditorChange} />
+                <button onClick={this.handleClick}>copy</button>
+                <CKEditor
+                  data={this.state.data2}
+                />
+              </div>
+          );
+      }
+}
 export default App;
