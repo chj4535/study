@@ -24,29 +24,30 @@ class Login_form extends Component {
     }
 
     render() {
+      let lo_id = this.state.login_id;
       const {onClick} = this.props;
       return (
             <Segment >
-      <Grid columns={2} relaxed='very' stackable>
-        <Grid.Column verticalAlign='middle'>
-          <Form size={"big"}>
-            <Form.Field width={16}>
-            <Form.Input  icon='user' iconPosition='left' label='Username or Email' placeholder='Username or Email' name='login_id' value={this.state.login_id} onChange={this.handleChange}/>
-            <Form.Input icon='lock' iconPosition='left' label='Password' type='password' name='login_password' value={this.state.login_password} onChange={this.handleChange}/>
+              <Grid columns={2} relaxed='very' stackable>
+                <Grid.Column verticalAlign='middle'>
+                  <Form size={"big"}>
+                    <Form.Field width={16}>
+                      <Form.Input  icon='user' iconPosition='left' label='Username or Email' placeholder='Username or Email' name='login_id' value={this.state.login_id} onChange={this.handleChange}/>
+                      <Form.Input icon='lock' iconPosition='left' label='Password' type='password' name='login_password' value={this.state.login_password} onChange={this.handleChange}/>
 
-            <Button content='Login' primary size='big' onClick={()=>{
-                let state={
-                  lo_id:this.state.login_id,
-                  lo_pw:this.state.login_password
-                }
-                onClick('login',state);
-        }}/>
-</Form.Field>
-          </Form>
-        </Grid.Column>
+                      <Button content='Login' primary size='big' onClick={()=>{
+                        let state={
+                          lo_id:this.state.login_id,
+                          lo_pw:this.state.login_password
+                        }
+                        onClick('login',this.state);
+                      }}/>
+                    </Form.Field>
+                  </Form>
+                </Grid.Column>
 
-        <Grid.Column verticalAlign='middle'>
-          <Form size={"big"}>
+                <Grid.Column verticalAlign='middle'>
+                  <Form size={"big"}>
             <Form.Input icon='user' iconPosition='left' label='Username' placeholder='Username'name='register_Username' value={this.state.register_Username} onChange={this.handleChange}/>
             <Form.Input icon='mail' iconPosition='left' label='Email' placeholder='Email' name='register_Email' value={this.state.register_Email} onChange={this.handleChange}/>
             <Form.Input icon='lock' iconPosition='left' label='Password' type='password' name='register_password' value={this.state.register_password} onChange={this.handleChange}/>

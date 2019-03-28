@@ -56,7 +56,6 @@ class Header extends Component {
 
 const get_Login_state = (state) => {
   return {
-    todos: state.todos,
     store_login: state.store_login,
     store_alarm:state.store_alarm
   }

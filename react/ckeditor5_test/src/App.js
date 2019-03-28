@@ -47,6 +47,7 @@ class App extends Component {
           editor={ ClassicEditor }
           data={this.state.data}
           config={{
+            toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote','Highlight' ],
             ckfinder:{uploadUrl: "/uploader"},
             mediaEmbed:{previewsInData:true}
           }}
