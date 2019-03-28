@@ -1,0 +1,26 @@
+﻿
+
+Caption=C:
+Description=로컬 고정 디스크
+FreeSpace=21347528704
+Size=64599998464
+VolumeName=my10x64_ENT_KR
+VolumeSerialNumber=3446D816
+
+
+Caption=D:
+Description=로컬 고정 디스크
+FreeSpace=17788628992
+Size=62913507328
+VolumeName=한글
+VolumeSerialNumber=9009F37C
+
+
+Caption=Z:
+Description=로컬 고정 디스크
+FreeSpace=59386732544
+Size=128033222656
+VolumeName=data
+VolumeSerialNumber=ACC61D02
+
+
