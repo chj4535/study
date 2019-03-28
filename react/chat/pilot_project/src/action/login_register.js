@@ -26,6 +26,8 @@ function login_try(info){
       .then(res => {
       console.log(res);
        dispatch(login_state(res));
+       localStorage.setItem('user',JSON.stringify(info));
+       localStorage.setItem('login_state',true);
     });
   }
 }

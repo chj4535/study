@@ -25,7 +25,7 @@ class Login_form extends Component {
 
     render() {
       let lo_id = this.state.login_id;
-      const {onClick} = this.props;
+      const {login_onClick,onClick} = this.props;
       return (
             <Segment >
               <Grid columns={2} relaxed='very' stackable>
@@ -40,7 +40,8 @@ class Login_form extends Component {
                           lo_id:this.state.login_id,
                           lo_pw:this.state.login_password
                         }
-                        onClick('login',this.state);
+                        this.props.onClick();
+                        login_onClick('login',this.state);
                       }}/>
                     </Form.Field>
                   </Form>
@@ -64,7 +65,7 @@ class Login_form extends Component {
 
 const login_register = (dispatch) => {
   return {
-    onClick(type,info){
+    login_onClick(type,info){
       if(type=='login'){
         dispatch(login_try(info))
       }

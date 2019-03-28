@@ -6,17 +6,30 @@ import { Redirect } from 'react-router-dom';
 class Login extends Component {
   constructor(props) {
       super(props);
+     this.onClick = this.onClick.bind(this);
    }
+   componentDidMount() {
+    this.checkUser();
+  }
+  componentWillUpdate(){
+    //localStorage에 등록까지 시간이 걸림! 그 시간만큼 대기
+    setTimeout(function() { //Start the timer
+      this.setState({render: true}) //After 1 second, set render to true
+  }.bind(this), 1000)
+    this.checkUser();
+  }
+  onClick(){
+    this.checkUser();
+  }
+  checkUser = () => {
+    const {history} = this.props;
+    if (localStorage.getItem("user")!=null) {
+      history.push("/");
+    }
+  }
     render() {
-      const {store_login} = this.props;
-      function redirect() {
-        if(store_login){
-            return <Redirect to='/'/>
-        }
-      }
       return (
         <div>
-          {redirect()}
           <div className="Login_body">
             <div className="Logo_form">
               <div className="Logo_img">
@@ -27,17 +40,12 @@ class Login extends Component {
               </div>
             </div>
             <div className="Login_form">
-              <Login_form/>
+              <Login_form onClick={this.onClick}/>
             </div>
           </div>
         </div>
         );
       }
 }
-const get_Login_state = (state) => {
-  return {
-    store_login: state.store_login
-  }
-}
 
-export default connect(get_Login_state,undefined)(Login);
+export default Login;

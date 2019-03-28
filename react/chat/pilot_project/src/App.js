@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Main from './components/Main/Main'
 import Login from './components/Login/Login';
-import Header from './components/Header/Header';
 
 class App extends Component {
   constructor(props){
@@ -10,8 +9,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <Header/>
+      <div id="app">
         <Route exact path="/" component={Main} />
         <Route exact path="/login" component={Login} />
       </div>

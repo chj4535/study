@@ -1,0 +1,36 @@
+.header_part{
+  height: 90px;
+}
+
+.body_part{
+  height: calc(100% - (90px));
+}
+
+.header_area{
+  background-color: blue;
+  height: 30px;
+}
+
+.menu_area{
+  background-color: black;
+  height: 30px;
+}
+
+.path_search_area{
+  background-color: yellow;
+  height: 30px;
+}
+
+.folder_tree_area{
+  height: 100%;
+  background-color: brown;
+  float: left;
+  width:200px;
+}
+
+.folder_content_area{
+  height: 100%;
+  float: left;
+  background-color: green;
+  width:calc(100% - (200px));
+}
