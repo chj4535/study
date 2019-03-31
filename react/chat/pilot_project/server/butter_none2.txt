@@ -1,0 +1,5 @@
+Caption  Description       FreeSpace    Size          VolumeName      VolumeSerialNumber  
+C:       ���� ���� ��ũ  21359243264  64599998464   my10x64_ENT_KR  3446D816            
+D:       ���� ���� ��ũ  17788628992  62913507328   �ѱ�            9009F37C            
+Z:       ���� ���� ��ũ  59386720256  128033222656  data            ACC61D02            
+
