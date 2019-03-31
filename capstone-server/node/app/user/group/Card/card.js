@@ -23,9 +23,9 @@ module.exports = function (param) {
                         console.log(err);
                     }
                     else{
-                        console.log(doc)
-                        console.log(doc[0])
-                        console.log(doc[0]._id)
+                        // console.log(doc)
+                        // console.log(doc[0])
+                        // console.log(doc[0]._id)
                         res.send(doc);
                     }
                 })
@@ -82,6 +82,7 @@ module.exports = function (param) {
                 db.collection('card').insert(card_item);
             }
         });
+        res.send(200);
     });
     
     card.delete("/", (req, res) => {//카드 수정
