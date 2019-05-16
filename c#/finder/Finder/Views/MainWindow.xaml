@@ -12,14 +12,10 @@
                 <Grid Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="50"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+                    <Label Grid.Row="1" Content="{Binding recruitLabel, Mode=OneWay}"></Label>
                 </Grid>
             </TabItem>
             <TabItem Header="TabItem">
