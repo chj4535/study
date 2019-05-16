@@ -1,0 +1,23 @@
+﻿<Window x:Class="Top_Level_Window.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Top_Level_Window"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Menu>
+            <MenuItem Header="창" x:Name="WindowMenu">
+                <MenuItem Header="임시 메뉴"/>
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>

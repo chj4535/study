@@ -1,0 +1,49 @@
+﻿<Window x:Class="WindowCustom.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WindowCustom"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- 타이틀바에 해당하는 공간 -->
+        <Grid Grid.Row="0">
+
+            <Rectangle MouseLeftButtonDown="Rectangle_MouseDown" 
+                       Fill="BlueViolet">
+
+            </Rectangle>
+
+            <DockPanel HorizontalAlignment="Right">
+                <Button x:Name="ToMiniButton" 
+                        Click="ToMiniButton_Click"
+                        Width="30"
+                        Height="30"></Button>
+                <Button x:Name="ToMaxButton" 
+                        Click="ToMaxOrNormalButton_Click"
+                        Width="30"
+                        Height="30"></Button>
+                <Button x:Name="CloseButton" 
+                        Click="CloseButton_Click"
+                        Width="30"
+                        Height="30"></Button>
+
+            </DockPanel>
+
+        </Grid>
+
+        <!-- 화면의 콘텐츠를 넣을 공간 -->
+        <Grid Grid.Row="1">
+
+        </Grid>
+    </Grid>
+</Window>

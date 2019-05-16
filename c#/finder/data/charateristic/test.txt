@@ -1,0 +1,3 @@
+star:5;
+recruit_tag:test1;test2;test3;test4;test5
+infra_bonus:store1;bonus1;
