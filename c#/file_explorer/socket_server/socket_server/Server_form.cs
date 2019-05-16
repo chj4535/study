@@ -118,7 +118,12 @@ namespace socket_server
             // 따라서 대리자를 통해 처리한다.
             AppendText(server_log_richtextbox, string.Format("[받음]{0}: {1}", ip, msg));
             string[] words = msg.Split(';');
-            
+            switch (words[0])
+            {
+                case "login":
+                    OnSendData("success;", null);
+                    break;
+            }
             // for을 통해 "역순"으로 클라이언트에게 데이터를 보낸다.
             for (int i = connectedClients.Count - 1; i >= 0; i--)
             {

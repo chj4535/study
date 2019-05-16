@@ -1,15 +1,30 @@
- Volume in drive Z is data
- Volume Serial Number is ACC6-1D02
 
- Directory of Z:\study\etc_study\react\chat\pilot_project\server
 
-2019-03-28  오후 05:48    <DIR>          .
-2019-03-28  오후 05:48    <DIR>          ..
-2019-03-28  오후 05:48             1,132 server.js
-2019-03-28  오후 05:34               784 test.txt
-2019-03-28  오후 05:38               501 text.txt
-2019-03-28  오후 05:14               784 text2.txt
-2019-03-28  오후 05:48               594 text3.txt
-2019-03-28  오후 05:48                 0 한글.txt
-               6 File(s)          3,795 bytes
-               2 Dir(s)  59,386,728,448 bytes free
+
+
+
+'4FF25139D348FAFB211274F3CDF1262F0038',
+'2019-04-18 15:02:08',
+'choi_LLLL',
+'AMD64',
+'2019-01-03 17:32:42',
+b'0',
+'192.168.190.236',
+'WIN-F5QA9TE2P0B',
+NULL,
+'192.168.190.236',
+3232284396,
+NULL,
+b'0',
+'Administrator',
+NULL,
+'14DAE9EC6A6D',
+8104,
+NULL,
+'ko',
+'Windows Server 2012 R2',
+'6.3',
+'f85b5cbac54004a6dfc271f4ff7fd3af',
+'WORKGROUP',
+'9b31b0b5de9716876afff56bb14133ec466e685961c212dd4deafe5fc6791782',
+'dbe9bbf8e4834ef29a13473548f717e9'

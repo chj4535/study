@@ -7,14 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using file_explorer;
 namespace file_explorer
 {
-    public delegate void login_result_Handler(string user_name,EventArgs e);
-
     public partial class Login_form : Form
     {
-        public event login_result_Handler loginEventHandler;
+        clientsocketHandler client_socket = new clientsocketHandler();
+        private readonly System.Threading.EventWaitHandle waitHandle = new System.Threading.AutoResetEvent(false);
         public Login_form()
         {
             InitializeComponent();
@@ -22,20 +21,23 @@ namespace file_explorer
 
         private void check_button_Click(object sender, EventArgs e)
         {
-            LoginHandler loginHandler = new LoginHandler();
             if (IdPwcheck()) // id , pw  모두 입력 됐으면
             {
-                if (loginHandler.LoginCheck(user_id_textbox.Text, user_pw_textbox.Text))
+                string user_id = user_id_textbox.Text;
+                string user_pw = user_pw_textbox.Text;
+                string[] client_info = new string[2];
+                client_info[0] = user_id;
+                client_info[1] = user_pw;
+                client_socket.set_socket_evnet(login_success);
+                client_socket.OnSendData("login"+";"+client_info[0] + ";" + client_info[1],null);
+                waitHandle.WaitOne();
+                MessageBox.Show("로그인 성공!","확인", MessageBoxButtons.OK, MessageBoxIcon.None);
+                Main_form main_form = new Main_form();
+                this.Hide();
+                main_form.ShowDialog();
+                if (main_form.DialogResult != DialogResult.OK)
                 {
-                    string user_id = user_id_textbox.Text;
-                    loginEventHandler(user_id,e);
-                    DialogResult = DialogResult.OK;
-                }
-                else
-                {
-                    MessageBox.Show("올바르지 않는 정보입니다!", "에러", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    user_id_textbox.Clear();
-                    user_pw_textbox.Clear();
+                    this.Dispose();
                 }
             }
         }
@@ -56,10 +58,14 @@ namespace file_explorer
             }
             return true;
         }
-
         private void cancel_button_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
+            System.Environment.Exit(1);
+        }
+
+        private void login_success(string name)
+        {
+            waitHandle.Set();
         }
     }
 }

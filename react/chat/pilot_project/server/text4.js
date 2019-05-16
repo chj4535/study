@@ -1,0 +1,30 @@
+INSERT INTO `agent` (`agent_key`, `access_timestamp`, `agent_name`, `architecture`, `os_install_date`, `changed_by_administrator`, `client_ip_list`, `computer`, `computer_desc`, `conn_ip`, `conn_ip_number`, `install_date`, `is_block_network`, `last_logged_on_sam_user`, `login_account`, `mac_list`, `memory`, `migrated_key`, `os_language`, `os_name`, `os_version`, `server_key`, `work_group`, `os_id`, `department_id`) VALUES
+('4FF25139D348FAFB211274F3CDF1262F0038', '2019-04-18 15:02:08', 'choi_LLLL', 'AMD64', '2019-01-03 17:32:42', b'0', '192.168.190.236', 'WIN-F5QA9TE2P0B', NULL, '192.168.190.236', 3232284396, NULL, b'0', 'Administrator', NULL, '14DAE9EC6A6D', 8104, NULL, 'ko', 'Windows Server 2012 R2', '6.3', 'f85b5cbac54004a6dfc271f4ff7fd3af', 'WORKGROUP', '9b31b0b5de9716876afff56bb14133ec466e685961c212dd4deafe5fc6791782', 'dbe9bbf8e4834ef29a13473548f717e9'),
+
+
+
+(`agent_key`,
+`access_timestamp`,
+`agent_name`,
+`architecture`,
+`os_install_date`,
+`changed_by_administrator`,
+`client_ip_list`,
+`computer`,
+`computer_desc`,
+`conn_ip`,
+`conn_ip_number`,
+`install_date`,
+`is_block_network`,
+`last_logged_on_sam_user`,
+`login_account`,
+`mac_list`,
+`memory`,
+`migrated_key`,
+`os_language`,
+`os_name`,
+`os_version`,
+`server_key`,
+`work_group`,
+`os_id`,
+`department_id`
