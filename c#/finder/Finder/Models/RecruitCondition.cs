@@ -39,7 +39,7 @@ namespace Finder.Models
             conditions.Add(new Condition() { Name = "자격", Contexts = recruitQualification });
             conditions.Add(new Condition() { Name = "포지션", Contexts = recruitPosition });
             conditions.Add(new Condition() { Name = "성별", Contexts = recruitGender });
-            conditions.Add(new Condition() { Name = "클래스", Contexts = recruitTag });
+            conditions.Add(new Condition() { Name = "클래스", Contexts = recruitClass });
             conditions.Add(new Condition() { Name = "태그", Contexts = recruitTag });
             return conditions;
         }
