@@ -9,15 +9,23 @@ namespace Finder.Models
     public class MainModel
     {
         RecruitCondition recruitCondtion = new RecruitCondition();
-        List<Condition> conditions;
+        CharacterInfo characterInfo = new CharacterInfo();
+        public List<TypeCondition> conditions;
+        public List<Charactor> charactors;
         public MainModel()
         {
-            conditions = recruitCondtion.SetRecruitConditions();
+            conditions = recruitCondtion.GetRecruitConditions();
+            charactors = characterInfo.GetCharacterInfo();
         }
 
-        public List<Condition>  GetRecruitConditions()
+        public List<TypeCondition>  GetRecruitConditions()
         {
             return conditions;
+        }
+
+        public List<Charactor> GetCharacterInfo()
+        {
+            return charactors;
         }
     }
 }

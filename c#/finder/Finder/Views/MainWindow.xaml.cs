@@ -27,40 +27,28 @@ namespace Finder
             InitializeComponent();
 
             DataContext = new MainViewModel();
-
-            //자격 조건들
-            string[] recruitQualification;
-            //포지션 조건들
-            string[] recruitPosition;
-            //성별 조건들
-            string[] recruitGender;
-            //클래스 조건들
-            string[] recruitClass;
-            //태그 조건들
-            string[] recruitTag;
-
-            string dir = "";
-            dir = Directory.GetCurrentDirectory();
-            List<Condition> conditions = new List<Condition>();
-            recruitQualification = File.ReadLines(dir + @"\data\set\RecruitCondition\Qualification.txt").ToArray();
-            recruitPosition = File.ReadLines(dir + @"\data\set\RecruitCondition\Position.txt").ToArray();
-            recruitGender = File.ReadLines(dir + @"\data\set\RecruitCondition\Gender.txt").ToArray();
-            recruitClass = File.ReadLines(dir + @"\data\set\RecruitCondition\Class.txt").ToArray();
-            recruitTag = File.ReadLines(dir + @"\data\set\RecruitCondition\Tag.txt").ToArray();
-
-            conditions.Add(new Condition() { Name = "자격", Contexts = recruitQualification });
-            conditions.Add(new Condition() { Name = "포지션", Contexts = recruitPosition });
-            conditions.Add(new Condition() { Name = "성별", Contexts = recruitGender });
-            conditions.Add(new Condition() { Name = "클래스", Contexts = recruitClass });
-            conditions.Add(new Condition() { Name = "태그", Contexts = recruitTag });
-
-            icTodoList.ItemsSource = conditions;
-
         }
-        public class Condition
+
+        private void button_Click(object sender, RoutedEventArgs e)
         {
-            public string Name { get; set; }
-            public string[] Contexts { get; set; }
+            /*
+            var button = sender as Button;
+            string tagValue = String.Empty;
+
+            if (button != null)
+            {
+                tagValue = button.Tag.ToString();
+
+                if (tagValue == "button1")
+                {
+                    button.Style = (Style)Application.Current.Resources["button1"];
+                }
+                else if (tagValue == "button2")
+                {
+                    button.Style = (Style)Application.Current.Resources["button2"];
+                }
+            }
+            */
         }
     }
 }

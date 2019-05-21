@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\CharacterInfo.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\RecruitCondition.cs" />
     <Compile Include="ViewModels\Command\DelegateCommand.cs" />

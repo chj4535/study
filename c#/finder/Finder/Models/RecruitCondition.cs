@@ -20,7 +20,7 @@ namespace Finder.Models
         //태그 조건들
         string[] recruitTag;
 
-        public List<Condition> conditions = new List<Condition>();
+        public List<TypeCondition> conditions = new List<TypeCondition>();
 
         public RecruitCondition()
         {
@@ -34,19 +34,19 @@ namespace Finder.Models
             recruitTag = File.ReadLines(dir + @"\data\set\RecruitCondition\Tag.txt").ToArray();
         }
 
-        public List<Condition> SetRecruitConditions()
+        public List<TypeCondition> GetRecruitConditions()
         {
-            conditions.Add(new Condition() { Name = "자격", Contexts = recruitQualification });
-            conditions.Add(new Condition() { Name = "포지션", Contexts = recruitPosition });
-            conditions.Add(new Condition() { Name = "성별", Contexts = recruitGender });
-            conditions.Add(new Condition() { Name = "클래스", Contexts = recruitClass });
-            conditions.Add(new Condition() { Name = "태그", Contexts = recruitTag });
+            conditions.Add(new TypeCondition() { Name = "자격", Contexts = recruitQualification });
+            conditions.Add(new TypeCondition() { Name = "포지션", Contexts = recruitPosition });
+            conditions.Add(new TypeCondition() { Name = "성별", Contexts = recruitGender });
+            conditions.Add(new TypeCondition() { Name = "클래스", Contexts = recruitClass });
+            conditions.Add(new TypeCondition() { Name = "태그", Contexts = recruitTag });
             return conditions;
         }
 
     }
 
-    public class Condition
+    public class TypeCondition
     {
         public string Name { get; set; }
         public string[] Contexts { get; set; }

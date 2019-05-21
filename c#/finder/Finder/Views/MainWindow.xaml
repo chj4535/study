@@ -6,26 +6,59 @@
         xmlns:local="clr-namespace:Finder"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+
+    <Window.Resources>
+        <Style x:Key="button1"  TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Tag" Value="button1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" Background="Gray" BorderThickness="3" >
+                            <ContentPresenter x:Name="contentPresenter" Margin="5"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="button2"  TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Tag" Value="button2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" Background="Red" BorderThickness="3" >
+                            <ContentPresenter x:Name="contentPresenter" Margin="5" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <TabControl Margin="0">
             <TabItem Header="TabItem">
-                <Grid Background="White">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Grid Background="White" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="1" Content="{Binding recruitLabel, Mode=OneWay}"></Label>
-                    <ItemsControl Grid.Row="0"  Name="icTodoList">
+                    <Label Grid.Row="1" Content="{Binding recruitLabel, Mode=OneWay}"/>
+                    <ItemsControl Grid.Row="0"  Name="icTodoList" ItemsSource="{Binding conditions}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
+                                <Border CornerRadius="5" BorderBrush="Black" BorderThickness="1 2 1 1">
+                                <Grid >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="70"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding Name}" Margin="10,5,5,5" HorizontalAlignment="Center"/>
-                                    <ItemsControl Grid.Column="1" Name="hi" ItemsSource="{Binding Contexts}">
+                                    <TextBlock Grid.Column="0" Text="{Binding Name}" Margin="10,5,5,5" HorizontalAlignment="Center" FontSize="15" VerticalAlignment="Center"/>
+                                    <ItemsControl Grid.Column="1" ItemsSource="{Binding Contexts}">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <WrapPanel/>
@@ -33,15 +66,24 @@
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Button Content="{Binding}" Margin="0,5,5,5" />
+                                                <Button Name="button" Content="{Binding}" Style="{StaticResource button1}" Command="{Binding ElementName=icTodoList,Path=DataContext.RecruitConditionCommand}" CommandParameter="{Binding ElementName=button}" Click="button_Click"/>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
                                 </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <ItemsControl Grid.Row="2"  Name="SelectCondition" ItemsSource="{Binding selectCondition}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding}"></Label>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </Grid>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="TabItem">
                 <Grid Background="White"/>
