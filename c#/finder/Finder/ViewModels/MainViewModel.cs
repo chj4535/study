@@ -22,7 +22,8 @@ namespace Finder.ViewModels
         public string test { get; set; }
         public DelegateCommand RecruitConditionCommand { get; private set; }
         public bool boolcheck = false;
-        public ObservableCollection<string> selectCondition { get; set; }
+        public List<string> selectCondition { get; set; }
+        public ObservableCollection<SelectRecruitMember> recruitMap { get; set; }
         public MainViewModel()
         {
             RecruitConditionCommand = new DelegateCommand(RecruitCondtionButtonClick);
@@ -31,7 +32,8 @@ namespace Finder.ViewModels
             ActorList= new string[] { "test1", "test2", "test3" };
             conditions = mainModel.GetRecruitConditions();
             charactors = mainModel.GetCharacterInfo();
-            selectCondition = new ObservableCollection<string>();
+            selectCondition = new List<string>();
+            recruitMap = new ObservableCollection<SelectRecruitMember>();
         }
 
         public void RecruitCondtionButtonClick(object sender)
@@ -54,9 +56,67 @@ namespace Finder.ViewModels
                     selectCondition.Remove((string)button.Content);
                 }
             }
+            CurrentRecurit();
+
         }
 
+        public void CurrentRecurit()
+        {
+            int selectConditioncount = selectCondition.Count;
+            List<string> currentCondition = new List<string>();
+            recruitMap = new ObservableCollection<SelectRecruitMember>();
+            select(selectConditioncount, currentCondition, 0);
+            OnPropertyChanged("recruitMap");
+        }
 
-        
+        public void select(int selectConditioncount, List<string> currentCondition, int currentselectConditioncount)
+        {
+
+            if(currentselectConditioncount== selectConditioncount)
+            {
+                if (currentCondition.Count != 0)
+                {
+                    string[] selectConditionarray;
+                    Charactor[] recruitMemberarray;
+                    List<Charactor> recruitMember = new List<Charactor>();
+                    selectConditionarray = currentCondition.ToArray();
+                    foreach(Charactor charactor in charactors)
+                    {
+                        bool check = true;
+                        foreach(string condition in selectConditionarray)
+                        {
+                            if (!charactor.RecruitConditions.Contains(condition))
+                            {
+                                check = false;
+                                break;
+                            }
+                        }
+                        if (check)
+                        {
+                            recruitMember.Add(charactor);
+                        }
+                    }
+                    recruitMemberarray = recruitMember.ToArray();
+                    if(recruitMemberarray.Length>0)
+                        recruitMap.Add(new SelectRecruitMember() { currentSelectRecruitCondition= selectConditionarray, currentSelectRecruitConditionMember= recruitMemberarray });
+                }
+                return;
+            }
+
+            select(selectConditioncount, currentCondition, currentselectConditioncount + 1); //not select
+
+            currentCondition.Add(selectCondition[currentselectConditioncount]);
+            select(selectConditioncount, currentCondition, currentselectConditioncount + 1); //select
+            currentCondition.Remove(selectCondition[currentselectConditioncount]);
+            return;
+
+        }
+
+        public class SelectRecruitMember
+        {
+            public string[] currentSelectRecruitCondition { get; set; }
+            public Charactor[] currentSelectRecruitConditionMember { get; set; }
+        }
+
     }
 }

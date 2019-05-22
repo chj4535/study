@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Finder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="600" Width="800">
 
     <Window.Resources>
         <Style x:Key="button1"  TargetType="{x:Type Button}">
@@ -39,7 +39,7 @@
     
     <Grid>
         <TabControl Margin="0">
-            <TabItem Header="TabItem">
+            <TabItem Header="TabItem" FontSize="15">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <Grid Background="White" >
                     <Grid.RowDefinitions>
@@ -75,20 +75,59 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                    <ItemsControl Grid.Row="2"  Name="SelectCondition" ItemsSource="{Binding selectCondition}">
+                        <ItemsControl Grid.Row="2"  Name="SelectCondition" ItemsSource="{Binding recruitMap}">
                         <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label Content="{Binding}"></Label>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="1 2 1 1">
+                                        <Grid >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <ItemsControl Grid.Column="0"  Name="SelectCondition" ItemsSource="{Binding currentSelectRecruitCondition}" VerticalAlignment="Center">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Vertical"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Button Name="button" Content="{Binding}" Style="{StaticResource button1}" HorizontalAlignment="Center" />
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                            <ItemsControl Grid.Column="1"  Name="RecruitMember" ItemsSource="{Binding currentSelectRecruitConditionMember}" VerticalAlignment="Center">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border BorderBrush="{Binding StarColor}" BorderThickness="2" Margin="5">
+                                                            <Grid>
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="200"/>
+                                                                    <RowDefinition Height="*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Image Grid.Row="0" Source="{Binding ImgUrl}"></Image>
+                                                                <TextBlock Grid.Row="1" Text="{Binding Name}" HorizontalAlignment="Center"></TextBlock>
+                                                            </Grid>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </Grid>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="TabItem">
+            <TabItem Header="TabItem" FontSize="15">
                 <Grid Background="White"/>
             </TabItem>
         </TabControl>
-
     </Grid>
 </Window>

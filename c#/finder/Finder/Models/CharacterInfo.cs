@@ -38,6 +38,7 @@ namespace Finder.Models
                     {
                         case "Star":
                             charactor.Star = Convert.ToInt32(infoDetails[0]);
+                            charactor.StarColor = SetStarColor(charactor.Star);
                             break;
                         case "RecruitCondition":
                             charactor.RecruitConditions = infoDetails;
@@ -52,6 +53,26 @@ namespace Finder.Models
             }
         }
 
+        public string SetStarColor(int star)
+        {
+            switch (star)
+            {
+                case 1:
+                    return "Green";
+                case 2:
+                    return "Green";
+                case 3:
+                    return "Green";
+                case 4:
+                    return "Purple";
+                case 5:
+                    return "Gold";
+                case 6:
+                    return "Gold";
+            }
+            return "Black";
+        }
+
         public List<Charactor> GetCharacterInfo()
         {
             return charactors;
@@ -63,6 +84,7 @@ namespace Finder.Models
     {
         public string Name { get; set; } //charactor name
         public int Star { get; set; } //charactor star
+        public string StarColor { get; set; } //charactor star
         public string ImgUrl { get; set; }//charactor imgurl
         public string[] RecruitConditions { get; set; }
         public string[] InfraBonus { get; set; }
