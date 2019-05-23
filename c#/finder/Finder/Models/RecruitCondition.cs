@@ -36,11 +36,11 @@ namespace Finder.Models
 
         public List<TypeCondition> GetRecruitConditions()
         {
-            conditions.Add(new TypeCondition() { Name = "자격", Contexts = recruitQualification });
-            conditions.Add(new TypeCondition() { Name = "포지션", Contexts = recruitPosition });
-            conditions.Add(new TypeCondition() { Name = "성별", Contexts = recruitGender });
-            conditions.Add(new TypeCondition() { Name = "클래스", Contexts = recruitClass });
-            conditions.Add(new TypeCondition() { Name = "태그", Contexts = recruitTag });
+            conditions.Add(new TypeCondition() { ConditionNum=1, Name = "자격", Contexts = recruitQualification });
+            conditions.Add(new TypeCondition() { ConditionNum = 2, Name = "포지션", Contexts = recruitPosition });
+            conditions.Add(new TypeCondition() { ConditionNum = 3, Name = "성별", Contexts = recruitGender });
+            conditions.Add(new TypeCondition() { ConditionNum = 4, Name = "클래스", Contexts = recruitClass });
+            conditions.Add(new TypeCondition() { ConditionNum = 5, Name = "태그", Contexts = recruitTag });
             return conditions;
         }
 
@@ -48,6 +48,7 @@ namespace Finder.Models
 
     public class TypeCondition
     {
+        public int ConditionNum { get; set; }
         public string Name { get; set; }
         public string[] Contexts { get; set; }
     }

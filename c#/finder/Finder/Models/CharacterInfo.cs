@@ -51,6 +51,11 @@ namespace Finder.Models
 
                 charactors.Add(charactor);
             }
+
+            charactors.Sort(delegate (Charactor x, Charactor y)
+            {
+                return y.Star.CompareTo(x.Star);
+            });
         }
 
         public string SetStarColor(int star)

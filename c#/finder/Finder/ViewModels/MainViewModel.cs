@@ -15,7 +15,6 @@ namespace Finder.ViewModels
     public class MainViewModel : ViewModelBase
     {
         MainModel mainModel = new MainModel();
-        public string[] ActorList; 
         public string recruitLabel { get; private set; }
         public List<TypeCondition> conditions{get; set;}
         public List<Charactor> charactors { get; set; }
@@ -29,7 +28,6 @@ namespace Finder.ViewModels
             RecruitConditionCommand = new DelegateCommand(RecruitCondtionButtonClick);
             recruitLabel = "///////////라벨 라인//////////////////////";
             test = "hello2";
-            ActorList= new string[] { "test1", "test2", "test3" };
             conditions = mainModel.GetRecruitConditions();
             charactors = mainModel.GetCharacterInfo();
             selectCondition = new List<string>();
@@ -56,6 +54,33 @@ namespace Finder.ViewModels
                     selectCondition.Remove((string)button.Content);
                 }
             }
+
+            selectCondition.Sort(delegate (string x, string y)
+            {
+                int xTypenum = -1;
+                int yTypenum = -1;
+                foreach (TypeCondition typeCondition in conditions)
+                {
+                    if (typeCondition.Contexts.Contains(x))
+                    {
+                        xTypenum = typeCondition.ConditionNum;
+                    }
+                    if (typeCondition.Contexts.Contains(y))
+                    {
+                        yTypenum = typeCondition.ConditionNum;
+                    }
+                }
+                if (xTypenum > yTypenum)
+                {
+                    return 1;
+                }
+                else if (xTypenum == yTypenum)
+                {
+                    return x.CompareTo(y);
+                }
+                else return -1;
+            });
+
             CurrentRecurit();
 
         }
