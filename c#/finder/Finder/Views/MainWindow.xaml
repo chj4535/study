@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Finder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="800" MinWidth="400" MinHeight="560">
 
     <Window.Resources>
         <Style x:Key="button1"  TargetType="{x:Type Button}">
@@ -40,14 +40,23 @@
     <Grid>
         <TabControl Margin="0">
             <TabItem Header="TabItem" FontSize="15">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                
                 <Grid Background="White" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="1" Content="{Binding recruitLabel, Mode=OneWay}"/>
+                    <Border Grid.Row="1" CornerRadius="5" BorderBrush="Black" BorderThickness="1 1 1 1">
+                        <Grid Background="Black">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="조건" Foreground="White" FontSize="20"></TextBlock>
+                            <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="출현 맴버" Foreground="White" FontSize="20"></TextBlock>
+                        </Grid>
+                    </Border>
                     <ItemsControl Grid.Row="0"  Name="icTodoList" ItemsSource="{Binding conditions}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -75,31 +84,35 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                        <ItemsControl Grid.Row="2"  Name="SelectCondition" ItemsSource="{Binding recruitMap}">
-                        <ItemsControl.ItemTemplate>
+                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl Name="SelectCondition" ItemsSource="{Binding recruitMap}">
+                            <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="1 2 1 1">
+                                    <Border CornerRadius="5" BorderBrush="Black" BorderThickness="2 1 2 1">
                                         <Grid >
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="120"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <ItemsControl Grid.Column="0"  Name="SelectCondition" ItemsSource="{Binding currentSelectRecruitCondition}" VerticalAlignment="Center">
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <StackPanel Orientation="Vertical"/>
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <Button Name="button" Content="{Binding}" Style="{StaticResource button1}" HorizontalAlignment="Center" />
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
-                                            <ItemsControl Grid.Column="1"  Name="RecruitMember" ItemsSource="{Binding currentSelectRecruitConditionMember}" VerticalAlignment="Center">
+                                            <Border Grid.Column="0" CornerRadius="5" BorderBrush="Black" BorderThickness="0 0 2 0">
+                                                <ItemsControl Name="SelectCondition" ItemsSource="{Binding currentSelectRecruitCondition}" VerticalAlignment="Center">
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <StackPanel Orientation="Vertical"/>
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Button Name="button" Content="{Binding}" Style="{StaticResource button1}" HorizontalAlignment="Center" />
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </Border>
+                                            <ItemsControl Grid.Column="1" Name="RecruitMember" ItemsSource="{Binding currentSelectRecruitConditionMember}" VerticalAlignment="Center">
                                                 <ItemsControl.ItemsPanel>
                                                     <ItemsPanelTemplate>
                                                         <WrapPanel/>
+
                                                     </ItemsPanelTemplate>
                                                 </ItemsControl.ItemsPanel>
                                                 <ItemsControl.ItemTemplate>
@@ -121,9 +134,9 @@
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </Grid>
-                </ScrollViewer>
             </TabItem>
             <TabItem Header="TabItem" FontSize="15">
                 <Grid Background="White"/>
