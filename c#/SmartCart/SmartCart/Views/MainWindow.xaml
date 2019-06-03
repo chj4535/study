@@ -102,11 +102,53 @@
             <Label Name="ClientName" Content="{Binding clientName}" FontSize="15" FontWeight="Bold" Margin="0" HorizontalAlignment="Center"/>
             <Label HorizontalAlignment="Right" Content="고객님" FontSize="15" FontWeight="Bold" Margin="-5,0,60,0"/>
         </StackPanel>
-        <TabControl Style="{StaticResource TabControlStyle}" Grid.Row="1" TabStripPlacement="Left">
+        <TabControl Style="{StaticResource TabControlStyle}" Grid.Row="1" TabStripPlacement="Left" SelectedIndex="{Binding SelectedTabindex}">
             <TabItem Header="최다판매 물품" Style="{StaticResource TabItemStyle}">
-                <Label Content="Content goes here..." />
+                <ItemsControl Name="BestSellingProduct" ItemsSource="{Binding items}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Black" BorderThickness="2" Margin="5" Width="320" Height="200" MouseDown="Border_MouseDown">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <Image Grid.Row="0" Source="{Binding ImgUrl}"></Image>
+                                    <TextBlock Grid.Row="1" Text="{Binding ItemID}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"></TextBlock>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </TabItem>
-            <TabItem Header="세일 품목" Style="{StaticResource TabItemStyle}"/>
+            <TabItem Header="세일 품목" Style="{StaticResource TabItemStyle}">
+                <ItemsControl Name="SailingProduct" ItemsSource="{Binding items}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Black" BorderThickness="2" Margin="5" Width="320" Height="200" MouseDown="Border_MouseDown">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <Image Grid.Row="0" Source="{Binding ImgUrl}"></Image>
+                                    <TextBlock Grid.Row="1" Text="{Binding ItemID}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"></TextBlock>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </TabItem>
             <TabItem Header="물품 검색" Style="{StaticResource TabItemStyle}"/>
         </TabControl>
     </Grid>

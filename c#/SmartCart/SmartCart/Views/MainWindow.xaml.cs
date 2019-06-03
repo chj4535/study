@@ -23,6 +23,7 @@ namespace SmartCart
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainViewModel mainViewmodel;
         public MainWindow()
         {
             
@@ -34,7 +35,8 @@ namespace SmartCart
                 case true:
                     InitializeComponent();
                     this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                    DataContext = new MainViewModel();
+                    mainViewmodel = new MainViewModel();
+                    DataContext = mainViewmodel;
                     break;
                 default:
                     System.Windows.Application.Current.Shutdown();
@@ -46,6 +48,17 @@ namespace SmartCart
             DataContext = new MainViewModel();
             ClientName.Content = "hello";
             */
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Border itemBorder = sender as Border;
+            Grid itemGrid = (Grid)itemBorder.Child;
+            TextBlock itemTextBlock = (TextBlock)itemGrid.Children[1];
+            string itemID = itemTextBlock.Text;
+            Window laodIteminfo = new LoadItemInfo(mainViewmodel.GetItem(itemID));
+            laodIteminfo.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            var result = laodIteminfo.ShowDialog();
         }
     }
 }

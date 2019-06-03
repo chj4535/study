@@ -59,6 +59,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\LoadItemInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,13 +72,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\CardInfo.cs" />
-    <Compile Include="Models\Items.cs" />
+    <Compile Include="Models\LoadItems.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="ViewModels\command\DelegateCommand.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\LoadCard.xaml.cs">
       <DependentUpon>LoadCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoadItemInfo.xaml.cs">
+      <DependentUpon>LoadItemInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
