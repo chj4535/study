@@ -1,0 +1,304 @@
+﻿<Window x:Class="SmartCart.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmartCart"
+        mc:Ignorable="d"
+        Title="SmartCart" Height="600" Width="1000">
+
+    <Window.Resources>
+        <Style TargetType="TabControl" x:Key="TabControlStyle">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="TabStripPlacement" Value="Left" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabControl">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- The container for tab item headers -->
+                            <TabPanel 
+                         Grid.Column="0"
+                         Panel.ZIndex="1" 
+                         Margin="0,0,4,-1" 
+                         IsItemsHost="True"
+                         Background="Transparent" />
+
+                            <!-- Shadow to the left of the tab pages -->
+                            <Border Grid.Column="0" Width="5" HorizontalAlignment="Right">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Offset="0" Color="Transparent" />
+                                        <GradientStop Offset="1" Color="Gray" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+
+                            <!-- Tab page -->
+                            <Border Grid.Column="1" 
+                            Background="White" 
+                            SnapsToDevicePixels="true"
+                            BorderThickness="2" 
+                            BorderBrush="#FF2B82FF">
+                                <ContentPresenter ContentSource="SelectedContent" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TabItem}" x:Key="TabItemStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+
+                        <!-- Tab item header -->
+                        <Border Name="border" 
+                        SnapsToDevicePixels="True" 
+                        BorderThickness="0" 
+                        Padding="5,8,15,8"
+                                CornerRadius="5,0,0,5"
+                        Margin="0,0,-4,0">
+                            <TextBlock Name="buttonText" 
+                                Margin="0" 
+                                FontSize="14" 
+                                Foreground="Gray" 
+                                Text="{TemplateBinding Header}" 
+                                VerticalAlignment="Center" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.Setters>
+                                    <Setter TargetName="border" Property="Background" Value="LightBlue" />
+                                </Trigger.Setters>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Trigger.Setters>
+                                    <Setter TargetName="border" Property="Background" Value="#FF2B82FF" />
+                                    <Setter TargetName="buttonText" Property="Foreground" Value="White"/>
+                                </Trigger.Setters>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Label Name="ClientName" Content="{Binding clientName}" FontSize="30" FontWeight="Bold" Margin="0" HorizontalAlignment="Center"/>
+            <Label HorizontalAlignment="Right" Content="고객님" FontSize="30" FontWeight="Bold" Margin="-5,0,60,0"/>
+        </StackPanel>
+        <TabControl Style="{StaticResource TabControlStyle}" Grid.Row="1" TabStripPlacement="Left" SelectedIndex="{Binding SelectedTabindex}" Margin="5,0,0,0">
+            <TabItem Header="최다판매 물품" Style="{StaticResource TabItemStyle}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl Name="BestSellingProduct" ItemsSource="{Binding bestSellingitems ,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel>
+                                </WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" BorderThickness="2" Margin="5" Width="250" Height="200" MouseDown="Border_MouseDown" Background="Transparent">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Grid.Row="0" Source="{Binding ImgUrl}"></Image>
+                                        <TextBlock Grid.Row="1" Text="{Binding ItemID}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"></TextBlock>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="세일 품목" Style="{StaticResource TabItemStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="129"/>
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer Name="listScrollbar" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl Name="SailingProduct" ItemsSource="{Binding sailingItems ,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Black" BorderThickness="2" Margin="5" Width="250" Height="200" MouseDown="Border_MouseDown" Background="Transparent">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="30"/>
+                                            </Grid.RowDefinitions>
+                                            <Image Grid.Row="0" Source="{Binding ImgUrl}"></Image>
+                                            <TextBlock Grid.Row="1" Text="{Binding ItemID}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"></TextBlock>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <Button  Name="typeall" Content="전체" Height="30" Command="{Binding SelectCategoryCommand}" CommandParameter="all" Click="Typeall_Click"/>
+                        <Button  Name="typemine"  Content="나만의 추천 목록" Height="30" Command="{Binding SelectCategoryCommand}" CommandParameter="mine" Click="Typeall_Click" Margin="1,0,-0.667,0"/>
+                        <Button  Name="type1" Content="전자제품" Height="30" Command="{Binding SelectCategoryCommand}" CommandParameter="1" Click="Typeall_Click"/>
+                        <Button  Name="type2" Content="식료품" Height="30" Command="{Binding SelectCategoryCommand}" CommandParameter="2" Click="Typeall_Click"/>
+                        <Button  Name="type3"  Content="과일" Height="30" Command="{Binding SelectCategoryCommand}" CommandParameter="3" Click="Typeall_Click"/>
+                        <Button  Name="type4"  Content="고기" Height="30" Command="{Binding SelectCategoryCommand}" CommandParameter="4" Click="Typeall_Click"/>
+                        <Button  Name="type5"  Content="주방용품" Height="30" Command="{Binding SelectCategoryCommand}" CommandParameter="5" Click="Typeall_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="물품 추가" Style="{StaticResource TabItemStyle}">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MaxWidth="500"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="250"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="SearchText" Grid.Row="0" Grid.Column="0" Margin="0,0,20,0" FontSize="30" VerticalAlignment="Center" Height="40"/>
+                    <Button Grid.Row="0" Grid.Column="1" Content="검색" FontSize="30" Margin="10,0,20,0" Command="{Binding SearchItemCommand}" CommandParameter="{Binding ElementName=SearchText}"/>
+                    <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="10"  Visibility="{Binding visibleState}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.Column="0" Source="{Binding searchItems.ImgUrl}" Height="260" Width="300"/>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" Margin="15,10,0,0">
+                            <TextBlock Text="타입" FontSize="15" Margin="5"/>
+                            <TextBlock Text="이름" FontSize="15" Margin="5"/>
+                            <TextBlock Text="가격" FontSize="15" Margin="5"/>
+                            <TextBlock Text="재고" FontSize="15" Margin="5"/>
+                            <TextBlock Text="판매 수량" FontSize="15" Margin="5"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical" Margin="15,10,0,0">
+                            <TextBlock Name="Category" Text="{Binding searchItems.Category}" FontSize="15" Margin="5"/>
+                            <TextBlock Name="itemID" Text="{Binding searchItems.ItemID}" FontSize="15" Margin="5"/>
+                            
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Name="price" Text="{Binding searchItems.Price}" FontSize="15" Margin="5"/>
+                                <TextBlock Text=" -> " FontSize="15" Margin="5" Visibility="{Binding searchItemvisible}"/>
+                                <TextBlock Name="discountprice" Text="{Binding searchItems.DiscountPrice}" FontSize="15" Margin="5" Visibility="{Binding searchItemvisible}"/>
+                            </StackPanel>
+                            <TextBlock Name="stock" Text="{Binding searchItems.Stock}" FontSize="15" Margin="5"/>
+                            <TextBlock Name="sellCount" Text="{Binding searchItems.SellCount}" FontSize="15" Margin="5"/>
+                        </StackPanel>
+                        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+                            <TextBlock   Name="description"  Text="{Binding searchItems.Description}" HorizontalAlignment="Center" Margin="10"/>
+                        </ScrollViewer>
+                    </Grid>
+
+                    <WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Visibility="{Binding visibleState}">
+                        <Label Content="상품명 :"  FontSize="25"/>
+                        <Label Content="{Binding searchItems.ItemID}"  FontSize="25"/>
+                        <Label Content="  수량"  FontSize="25"/>
+                        <TextBox FontSize="25" Padding="10,0,10,0" TextAlignment="Center" Text="{Binding productCount}" IsEnabled="False"/>
+                        <Button Content="&lt;" Width="30" FontSize="25" FontWeight="Bold" FontFamily="Arial Black" Command="{Binding CountChangeCommand}" CommandParameter="-"/>
+                        <Button Content="&gt;" Width="30" FontSize="25" FontWeight="Bold" FontFamily="Arial Black" Command="{Binding CountChangeCommand}" CommandParameter="+"/>
+                        <Button Content="장바구니에 추가" Margin="20,0,0,0" Padding="10,0,10,0" FontSize="25" FontWeight="Bold" Command="{Binding AddBasketCommand}"/>
+                    </WrapPanel>
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="장바구니" Style="{StaticResource TabItemStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="125"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="이미지" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="제품 이름" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"></TextBlock>
+                        <TextBlock Grid.Column="2" Text="제품 가격" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"></TextBlock>
+                        <TextBlock Grid.Column="3" Text="선택한 수량" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"></TextBlock>
+                        <TextBlock Grid.Column="4" Text="합계" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"></TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="10">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ItemsControl Name="bucketList" ItemsSource="{Binding bucketList ,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="Black" BorderThickness="0,0,0,2" Padding="0,0,0,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="125"/>
+                                                    <ColumnDefinition Width="120"/>
+                                                    <ColumnDefinition Width="120"/>
+                                                    <ColumnDefinition Width="200"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Column="0" Source="{Binding ImgUrl}" Height="100"></Image>
+                                                <TextBlock Name="bucketItem" Grid.Column="1" Text="{Binding ItemID}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"></TextBlock>
+                                                <TextBlock Grid.Column="2" Text="{Binding Price}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"></TextBlock>
+                                                <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                                                    <Label Content="수량"  FontSize="15" VerticalAlignment="Center"/>
+                                                    <TextBox FontSize="15" Padding="10,0,10,0" TextAlignment="Center" Text="{Binding SelectCount}" VerticalAlignment="Center" IsEnabled="False"/>
+                                                    <Button Content="&lt;" Width="30" FontSize="15" FontWeight="Bold" FontFamily="Arial Black" Command="{Binding ElementName=bucketList,Path=DataContext.BucketCountMinusCommand}" CommandParameter="{Binding ElementName=bucketItem}" VerticalAlignment="Center"/>
+                                                    <Button Content="&gt;" Width="30" FontSize="15" FontWeight="Bold" FontFamily="Arial Black" Command="{Binding ElementName=bucketList,Path=DataContext.BucketCountPlusCommand}" CommandParameter="{Binding ElementName=bucketItem}" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                                <TextBlock Grid.Column="4" Text="{Binding TotalPrice}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"></TextBlock>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <TextBlock Text="소계 : " VerticalAlignment="Center" FontSize="30" Margin="10"/>
+                        <TextBlock Text="{Binding subTotal}" VerticalAlignment="Center" FontSize="30" Margin="10"/>
+                        <TextBlock Text="세금 : " VerticalAlignment="Center" FontSize="30" Margin="10"/>
+                        <TextBlock Text="{Binding tex}" VerticalAlignment="Center" FontSize="30" Margin="10"/>
+                        <TextBlock Text="총계 : " VerticalAlignment="Center" FontSize="30" Margin="10"/>
+                        <TextBlock Text="{Binding totalPrice}" VerticalAlignment="Center" FontSize="30" Margin="10"/>
+                    </StackPanel>
+                    <Button Grid.Row="2" Content="구매" HorizontalAlignment="Right" FontSize="30" Margin="5" Width="100" Command="{Binding PurchaseCommand}"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

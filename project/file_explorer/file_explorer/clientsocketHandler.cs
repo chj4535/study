@@ -23,7 +23,7 @@ namespace file_explorer
                 string address = "localhost"; // "127.0.0.1" 도 가능
                 int port = 2233;
                 mainSock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP); // 소켓 초기화
-                mainSock.Connect("192.168.190.236", port);
+                mainSock.Connect(address, port);
             }
             catch
             {

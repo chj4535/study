@@ -24,6 +24,7 @@ namespace SmartCart.Views
         {
             Console.Write(selectedItem.ItemID);
             InitializeComponent();
+            this.Title = selectedItem.ItemID;
             itemImage.Source = new BitmapImage( new Uri(selectedItem.ImgUrl));
         }
     }

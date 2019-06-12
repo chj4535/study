@@ -32,16 +32,26 @@ namespace SmartCart
             var result = loadCart.ShowDialog();
             switch (result)
             {
-                case true:
-                    InitializeComponent();
-                    this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                    string dir = "";
-                    dir = Directory.GetCurrentDirectory();
-                    string[] itemsPath = Directory.GetFiles(dir + @"\SmartCard\Items");
-                    Uri iconUri = new Uri(dir+ @"\SmartCard\icon.ico", UriKind.RelativeOrAbsolute);
-                    this.Icon = BitmapFrame.Create(iconUri);
-                    mainViewmodel = new MainViewModel();
-                    DataContext = mainViewmodel;
+                case true: //카드 삽입 성공
+                    Window checkPassword = new CheckPassWord();
+                    checkPassword.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    var checkPasswordresult = checkPassword.ShowDialog();
+                    switch (checkPasswordresult)
+                    {
+                        case true://비밀번호 성공
+                            InitializeComponent();
+                            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                            string dir = "";
+                            dir = Directory.GetCurrentDirectory();
+                            Uri iconUri = new Uri(dir + @"\SmartCard\icon2.png", UriKind.RelativeOrAbsolute);
+                            this.Icon = BitmapFrame.Create(iconUri);
+                            mainViewmodel = new MainViewModel();
+                            DataContext = mainViewmodel;
+                            break;
+                        case false:
+                            System.Windows.Application.Current.Shutdown();
+                            break;
+                    }
                     break;
                 default:
                     System.Windows.Application.Current.Shutdown();
@@ -64,6 +74,11 @@ namespace SmartCart
             Window laodIteminfo = new LoadItemInfo(mainViewmodel.GetItem(itemID));
             laodIteminfo.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             var result = laodIteminfo.ShowDialog();
+        }
+
+        private void Typeall_Click(object sender, RoutedEventArgs e)
+        {
+            this.listScrollbar.ScrollToTop();
         }
     }
 }
